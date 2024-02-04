@@ -9,25 +9,25 @@ export const Home = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [repos, setRepos] = useState(null);
 
-
   const handleGetData = async () => {
-    const userData = await fetch(`https://api.github.com/users/${user}`)
+    const userData = await fetch(`https://api.github.com/users/${user}`);
     const newUser = await userData.json();
-    
-    if(newUser.name) {
-      const {avatar_url, name, bio } = newUser
-      setCurrentUser({avatar_url, name, bio })
 
-      const reposData = await fetch(`https://api.github.com/users/${user}/repos`)
+    if (newUser.name) {
+      const { avatar_url, name, bio, login } = newUser;
+      setCurrentUser({ avatar_url, name, bio, login });
+
+      const reposData = await fetch(
+        `https://api.github.com/users/${user}/repos`
+      );
       const newRepos = await reposData.json();
 
-      if(newRepos.length) {
-        setRepos(newRepos)
+      if (newRepos.length) {
+        setRepos(newRepos);
       }
-
-
     }
-  }
+  };
+
 
   return (
     <div>
@@ -35,7 +35,7 @@ export const Home = () => {
       <div className="conteudo">
         <img src={background} alt="Bg github" className="background" />
         <div className="info">
-          <div>
+          <div className="info-input">
             <input
               name="usuario"
               value={user}
@@ -45,28 +45,33 @@ export const Home = () => {
             />
             <button onClick={handleGetData}>Buscar</button>
           </div>
-          {/* {currentUser.name ? (): null} */}
-          <div className="perfil">
-            <img
-              src="https://avatars.githubusercontent.com/u/81269326?s=400&u=6ee8ae88cc938671a29b3290f7a39ae75baa6eac&v=4"
-              alt="imagem do Perfil"
-              className="profile"
-            />
+          {currentUser?.name ? (
+            <>
+              <div className="perfil">
+                <img
+                  src={currentUser.avatar_url}
+                  alt="imagem do Perfil"
+                  className="profile"
+                />
 
+                <div>
+                  <h3>{currentUser.name}</h3>
+                  <span>{currentUser.login}</span>
+                  <p>{currentUser.bio}</p>
+                </div>
+              </div>
+              <hr />
+            </>
+          ) : null}
+
+          {repos ? (
             <div>
-              <h3>Eder Lima</h3>
-              <span>@EderLimaDev</span>
-              <p>Descrição</p>
+              <h4 className="repositorio">Repositórios</h4>
+              {repos.map((repo) => (
+                <ItemList key={repo.id} title={repo.name} description={repo.description} url={repo.html_url}/>
+              ))}
             </div>
-          </div>
-          <hr />
-
-          <div>
-            <h4 className="repositorio">Repositórios</h4>
-            <ItemList title="teste" description="teste de descrição" />
-            <ItemList title="teste" description="teste de descrição" />
-            <ItemList title="teste" description="teste de descrição" />
-          </div>
+          ) : null}
         </div>
       </div>
     </div>

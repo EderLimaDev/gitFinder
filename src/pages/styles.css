@@ -23,7 +23,6 @@ input {
     border-radius: 22px;
     color: #ffff;
     border: 1px solid #9999;
-    min-width: 250px;
     margin-right: 12px;
     width: 80%;
     background: transparent;
@@ -39,6 +38,11 @@ button {
     color: #ffff;
     font-size: 18px;
     padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.6;
 }
 
 .perfil {
@@ -70,12 +74,59 @@ button {
     display: block;
     color: #9999;
     font-size:12px;
-    margin: 20px 0 0 0;
+    margin-bottom: 20px;
 }
+
 
 .repositorio {
     font-size: 32px;
     color: #ffff;
     margin: 12px;
     text-align: center;
+}
+
+
+@media (max-width: 860px) {
+    .conteudo {
+        align-items: center;
+        justify-content: center;
+    }
+    .background {
+        height: 50vh;
+    }
+
+    .info-input {
+        width: 100%;
+        margin: 0;
+        display: flex;
+    }
+
+    .info {
+        width: 80%;
+        margin:0 5%;
+        margin-top: 40px;
+        color: #ffff;
+    }
+
+    .perfil {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    input {
+        width: 100%;
+        margin-right: 0;
+        border-radius: 22px 0 0 22px;
+    }
+    button {
+        border-radius: 0 22px 22px 0;
+        margin-right:0;
+        font-size: 16px;
+        padding: 11px;
+    }
+    .perfil img {
+        margin-bottom: 12px;
+    }
+
+
 }

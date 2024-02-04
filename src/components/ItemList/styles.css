@@ -1,15 +1,36 @@
 .item-list {
-    margin: 24px 0;
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .item-list strong {
     color: #539bf5;
     font-size: 24px;
-    margin: 24px 0;
+    margin-top: 15px;
 }
 
 .item-list p {
     color: #9999;
     font-size: 12px;
-    margin-top: 24px 0;
+    margin: 10px 0 15px 0;
+}
+
+.item-list a {
+    cursor: pointer;
+    color: #9999;
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+@media (max-width: 500px) {
+    .item-list a {
+        display: flex;
+        font-size: 15px;
+        overflow: hidden;
+        flex-wrap: wrap;
+    }
+    
+    
 }
